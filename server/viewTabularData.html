@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Tabular Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <table id="table">
+            <thead>
+                <tr>
+                    <th data-field="room">Room</th>
+                    <th data-field="tableID">Table ID</th>
+                    <th data-field="name">Table Name</th>
+                    <th data-field="qrLink">QR Link</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+
+<script>
+
+    /** Login to api to receive token, then get data */
+    const getData = async () => {
+        const requestBody = {
+            username: "John Smith"
+        };
+        const tokenRequest = await fetch('http://localhost:3000/login', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestBody)
+        })
+        const tokenJSON = await tokenRequest.json();
+        const accessToken = tokenJSON.accessToken;
+
+        const dataRequest = await fetch('http://localhost:3000/getVisibleTables', {
+            method: 'get',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        const tables = await dataRequest.json();
+        return tables;
+    }
+
+
+    // Get data, then populate table with received data
+    getData().then(tableData => {
+        const $table = $('#table');
+
+        $(function () {
+            $('#table').bootstrapTable({
+                data: tableData
+            });
+        });
+    });
+</script>
+
+</html>
+
+</html>

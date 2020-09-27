@@ -1,0 +1,12 @@
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "username": "John Smith"
+}
+
+###
+
+GET http://localhost:3000/getVisibleTables
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBTbWl0aCIsImlhdCI6MTYwMDgxODAwMH0.VHXZvlLws_qj8UHbc40X5s0x1v9rIiSI6cvuExm1hIA
+

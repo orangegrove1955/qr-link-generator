@@ -1,0 +1,23 @@
+{
+  "name": "hungryhungry",
+  "version": "1.0.0",
+  "description": "HungryHungry code test",
+  "main": "data_generator/generator.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node data_generator/generator.js && node server/server.js"
+  },
+  "author": "Matthew Williams",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^26.4.2",
+    "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "axios": "^0.20.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "qrcode": "^1.4.4"
+  }
+}
